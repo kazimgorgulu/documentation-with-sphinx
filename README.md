@@ -1,3 +1,2 @@
 # gitTest
-# cool
-hi there
+just for testing git&github
