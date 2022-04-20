@@ -1,7 +1,6 @@
 """DDDD
 ddd"""
 
-import numpy as np
 
 def break_library_into_components(filename, path_for_components):
     """# break_library_into_components('cornerstone_pdk/gds/CORNERSTONE MPW Run 28 GDSII Template.gds', 'cornerstone_pdk/gds/')"""
