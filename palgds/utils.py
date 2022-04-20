@@ -4,7 +4,14 @@ import gdstk
 import numpy as np
 
 def break_library_into_components(filename, path_for_components):
-    """# break_library_into_components('cornerstone_pdk/gds/CORNERSTONE MPW Run 28 GDSII Template.gds', 'cornerstone_pdk/gds/')"""
+    """break_library_into_components('cornerstone_pdk/gds/CORNERSTONE MPW Run 28 GDSII Template.gds', 'cornerstone_pdk/gds')
+
+    Args:
+        filename:
+        path_for_components:
+
+    Returns:
+    """
     library = gdstk.read_gds(filename)
     top_cells = library.top_level()
 
@@ -16,7 +23,14 @@ def break_library_into_components(filename, path_for_components):
         temp_lib.write_gds(filename)
 
 def read_ports_from_txt_file(filename):
-    """Important note: The angle value in the file should be in the unit of degrees. It is converted to radians here."""
+    """
+    Important note: The angle value in the file should be in the unit of degrees. It is converted to radians here.
+    Args:
+        filename:
+
+    Returns:
+
+    """
     try:
         with open(filename) as txt_file:
             lines = txt_file.read().splitlines()
