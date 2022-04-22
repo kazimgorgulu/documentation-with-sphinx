@@ -1,5 +1,14 @@
-Cookbook
-========
+How to Use
+==========
+
+.. toctree::
+   :hidden:
+
+   pcell
+   circuit
+   pdk
+
+
 
 Crawl a web page
 
@@ -30,3 +39,15 @@ which while ignore URLs matching the passed regex::
     python main.py -i "^blog" -u <url>
 
 This will only crawl pages that contain your blog URL.
+
+
+.. code-block:: python
+   :linenos:
+   :emphasize-lines: 3,5-6
+
+   def some_function():
+       interesting = False
+       print 'This line is highlighted.'
+       print 'This one is not...'
+       print '...but this one is.'
+       print 'This one is highlighted too.'
