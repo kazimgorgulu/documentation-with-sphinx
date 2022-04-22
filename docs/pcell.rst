@@ -43,34 +43,5 @@ Then, using that class definition we will create a RingResonator object with 10 
     lib.write_gds("ring_resonator.gds",max_points=4000)
     # In the following lines we will create connect two ring resonators in a circuit:
 
-
 .. image:: _images/ringres.svg
     :align: center
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-asdfsdf
-
-
-
-
-
-
-
-
-See :ref:`this code snippet <this-py>` for an example.
-
