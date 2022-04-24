@@ -12,12 +12,12 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../palgds/'))
+sys.path.insert(0, os.path.abspath('../palgds-demo/'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'palgds'
+project = 'palgds-demo'
 copyright = '2022, Kazim Gorgulu'
 author = 'Kazim Gorgulu'
 
@@ -38,7 +38,7 @@ extensions = [
 autodoc_mock_imports = ["gdstk", "numpy"]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates', '_images']
+templates_path = ['_templates', '_tutorial']
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.

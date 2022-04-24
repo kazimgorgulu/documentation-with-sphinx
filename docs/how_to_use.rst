@@ -8,7 +8,8 @@ How to Use
    circuit
    pdk
 
-
+This tutorial covers the major concepts you need to know to start designing. It starts with the introducing the general
+concept of PCell. Then, ``PCell`` class of ``palgds`` is
 
 Crawl a web page
 
