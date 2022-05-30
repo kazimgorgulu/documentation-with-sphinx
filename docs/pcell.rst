@@ -45,18 +45,21 @@ After creating ``RingResonator`` class, we can create an instance of it. Thanks 
 class, we can easily create variants of ring resonators. Let's create a ring resonator object with
 radius of 5 :math:`\mu m`, coupling gap of 0.2 :math:`\mu m`, and line-width of 0.45 :math:`\mu m`:
 
-.. literalinclude:: _tutorial/example1.py
-    :start-at: ring_res = RingResonator(name="RingRes", radius=5, gap=0.2, width=0.45)
-    :end-at: ring_res.write_svg(ring_res.name + ".svg")
+.. code-block:: python
+
+    ring_res = RingResonator(name="RingRes", radius=5, gap=0.2, width=0.45)
+    ring_res.write_svg("RingRes.svg")
 
 .. image:: _tutorial/ringres.svg
     :align: center
 
 You can export the GDSII layout using a library:
 
-.. literalinclude:: _tutorial/example1.py
-    :start-at: lib = gdstk.Library()
-    :end-at: lib.write_gds("RingRes.gds", max_points=4000)
+.. code-block:: python
+    
+    lib = gdstk.Library()
+    lib.add(ring_res, *ring_res.dependencies(True))
+    lib.write_gds("RingRes.gds", max_points=4000)
 
 
 Here, we created the elements of the ``RingResonator`` in ``_create_elements`` method.
@@ -65,7 +68,7 @@ by providing appropriate parameters.
 
 ``ports`` is created in ``_create_ports`` method. ``ports`` is a python ``dict`` that stores the port objects.
 Every port is an instance of ``Port`` class containing the properties of the port.
-The ports in a pcell is defined in the following way:
+The ports in a pcell are defined in the following way:
 
 **Ports definition:** ``{name1: Port(position, angle, port_type), name2: ... }``
 
@@ -84,8 +87,3 @@ Let's display the string representations of ``ring_res`` object and its ports:
     >>> print(ring_res.ports)
     {'in': Port(position=(-5.000, 0.000), angle=3.142, port_type=op),
      'out': Port(position=(5.000, 0.000), angle=0.000, port_type=op)}
-
-
-
-However, we don't have to use the same
-method to create ``cell`` object. Alternatively we could have done everything in the ``__init__()`` method.=====

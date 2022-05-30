@@ -1,14 +1,24 @@
 import gdstk
 import numpy as np
-import palgds.base_cells as bc
 
+import os 
+import sys
+import palgds.base_cells as bc
 from palgds.circuit import Circuit
 
-def draw(pcell):
+print(sys.path)
+print(os.getcwd())
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+print(sys.path)
+print(os.getcwd())
+
+def draw(pcell, path, scale=300):
     """ svg export function from gdstk library."""
     bb = pcell.bounding_box()
-    scaling = 300 / (1.1 * (bb[1][0] - bb[0][0]))
-    name = (pcell.name + ".svg")
+    scaling = scale / (1.1 * (bb[1][0] - bb[0][0]))
+    name = path + pcell.name + ".svg"
     pcell.write_svg(
         name,
         scaling=scaling,
@@ -37,21 +47,67 @@ class RingResonator(bc.PCell):
                            "out": bc.Port((radius, 0), 0, "op"),})
 
 if __name__ == "__main__":
+    path = os.path.dirname(os.path.abspath(__file__)) + "/"
     ring_res = RingResonator(name="RingRes", radius=5, gap=0.2, width=0.45)
-    ring_res.write_svg(ring_res.name + ".svg")
-    lib = gdstk.Library()
-    lib.add(ring_res, *ring_res.dependencies(True))
-    lib.write_gds("RingRes.gds", max_points=4000)
-    draw(ring_res)
-    print(ring_res)
-    print(ring_res.ports)
+    # ring_res.write_svg(path + "RingRes.svg")
+    # lib = gdstk.Library()
+    # lib.add(ring_res, *ring_res.dependencies(True))
+    # lib.write_gds(path + "RingRes.gds", max_points=4000)
+    draw(ring_res, path)
 
 
 
-import os
-path = os.path.abspath('../../palgds-demo/samples/')
+
+###########################Circuit###################################
+ring_res = RingResonator(name="RingResonator", radius=10, gap=0.2, width=0.45)
+gc = bc.GDSCell(name="Grating_Coupler", filename='Grating_Coupler.gds', ports={"in": bc.Port((0, 0), 0, "op")})
+
+circuit = Circuit(name='RingResCircuit',
+                  pcells={"rr": ring_res, "gc1": gc, "gc2": gc},
+                  translations={"rr": (0, 0),
+                                "gc1": (-15, 0),
+                                "gc2": (15, 0),
+                                },
+                  rotations={"gc2": np.pi},
+                  links=[{"from": ("rr", "in"), "to": ("gc1", "in")},
+                         {"from": ("rr", "out"), "to": ("gc2", "in")},
+                         ]
+                  )
+
+draw(circuit, path, scale=600)
+
+ybranch = bc.GDSCell(name="YBranch", filename='YBranch.gds', ports_filename="YBranch.txt")
+draw(ybranch, path)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import os
+# path = os.path.abspath('../../palgds-demo/samples/')
 # print(path)
-gdscell = bc.GDSCell(name='MMI', filename=path+"/MMI.gds", rename="cccell")
+# gdscell = bc.GDSCell(name='MMI', filename=path+"/MMI.gds", rename="cccell")
 
 # p = bc.Port((1,2.222), 3.33)
 # print(p)
